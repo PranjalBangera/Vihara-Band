@@ -1,119 +1,164 @@
+# VIHARA BAND
+### Embedded Wearable Motion Monitoring, Step Counting & Fall Analysis
 
-# Vihara Band Internship – Electronics Engineering Portfolio
+<p align="center">
+  **An Embedded Systems & Wearable Electronics Project**
+</p>
 
-Welcome to my engineering project portfolio! This repository brings together my work in hardware development, embedded software, PCB design, simulation and electronics engineering.
+---
 
-## 👨‍💻 About Me
+## 📌 Project Overview
 
-I am an Electronics and Communication Engineering student specializing in Advanced Communication Technology, interested in hardware development, embedded systems, PCB design and software engineering.
+Vihara Band is a wearable electronics project focused on motion monitoring, step counting and fall analysis.
 
-## 🛠️ Technical Domains
+The project brings together hardware development, embedded software, PCB design and application development to build an integrated wearable monitoring system.
 
-| Domain | Description |
+This repository contains the project files, hardware designs, software implementation, PCB development resources and supporting documentation.
+
+## 🎯 Project Objectives
+
+- Develop a wearable electronic monitoring system.
+- Monitor movement and motion-related activity.
+- Implement step-counting functionality.
+- Explore fall detection and analysis.
+- Integrate hardware and embedded software.
+- Develop and organize PCB design files.
+- Provide an application interface for interacting with the system.
+
+## 🏗️ Project Architecture
+
+The project is organized into four major development areas:
+
+| Area | Description |
 |---|---|
-| Hardware Development | Circuit design, component interfacing and prototyping |
-| Software Development | Embedded C, C++, Python and firmware |
-| PCB Design | Schematic capture, PCB layout and fabrication |
-| Embedded Systems | Arduino, ESP32 and microcontrollers |
-| Communication Systems | RF, signal processing and GNU Radio |
-| Simulation | Ansys HFSS, MATLAB and LTspice |
-| Digital Design | Verilog and digital electronics |
+| Hardware Development | Electronic components, circuit connections and wearable hardware |
+| Embedded Software | Firmware and motion-monitoring logic |
+| PCB Design | Circuit schematics, PCB layout and fabrication resources |
+| Application Development | Software application associated with the wearable system |
 
 ## 📂 Repository Structure
 
 ```text
 Vihara-Band/
 │
-├── Hardware/
-│   ├── Circuit_Diagrams/
-│   ├── Component_Datasheets/
-│   └── Hardware_Connections/
+├── Vihara-Band-main/
+│   └── Main project hardware/software resources
 │
-├── Software/
-│   ├── Embedded_C/
-│   ├── Arduino_ESP32/
-│   ├── Python/
-│   ├── MATLAB/
-│   └── Verilog/
+├── Vihara-Band-Application-main/
+│   └── Application development resources
 │
-├── PCB_Design/
-│   ├── Schematics/
-│   ├── PCB_Layouts/
-│   ├── Gerber_Files/
-│   ├── BOM/
-│   └── 3D_Models/
+├── updated pcb/
+│   └── Updated PCB design files
 │
-├── Projects/
-│   ├── Project_01/
-│   ├── Project_02/
-│   └── Project_03/
+├── Zilliot_Internship.pdf
+│   └── Internship documentation
 │
-├── Documentation/
-│   ├── Project_Reports/
-│   ├── Block_Diagrams/
-│   ├── Flowcharts/
-│   └── Testing_Results/
+├── LICENSE
 │
-└── Images/
-    ├── Hardware_Photos/
-    └── Project_Demonstrations/
+└── README.md
 ```
 
 ## 🔧 Hardware Development
 
-This section contains:
-- Electronic circuit designs
-- Hardware implementation
-- Sensor interfacing
-- Microcontroller connections
-- Hardware testing and results
+This section covers the physical electronics and wearable hardware development.
 
-## 💻 Software Development
+Key areas:
+- Hardware architecture
+- Electronic components and interfacing
+- Circuit connections
+- Wearable device implementation
+- Hardware testing and validation
 
-This section contains:
-- Embedded C/C++ programs
-- Arduino and ESP32 firmware
-- Python applications
-- MATLAB simulations
-- Verilog HDL programs
+## 💻 Embedded Software Development
+
+This section contains the software associated with the wearable monitoring system.
+
+Key areas:
+- Embedded programming
+- Motion monitoring
+- Step-counting implementation
+- Fall analysis
+- Hardware and software integration
 
 ## 🔌 PCB Design
 
-This section contains:
-- Circuit schematics
-- PCB layouts
-- Component placement and routing
-- Gerber and drill files
-- Bill of Materials (BOM)
-- 3D PCB models
+PCB development is an important part of the Vihara Band project.
 
-## 🚀 Projects
+The repository includes an updated PCB design directory.
 
-My projects combine hardware, software and PCB development wherever applicable. Each project folder contains its relevant design files, source code, documentation and results.
+Key areas:
+- PCB schematic design
+- Component placement
+- PCB routing
+- Board layout
+- PCB design documentation
 
-## 📊 Project Documentation
+## 📱 Application Development
 
-Project documentation includes:
-- Design methodology
-- Block diagrams and flowcharts
-- Circuit diagrams
-- Simulation results
-- Hardware photographs
-- Testing and validation
+The application component supports the software side of the Vihara Band project.
 
-## 🎯 Career Interests
+Application source files and related resources are maintained separately from the embedded hardware resources.
 
-- Embedded Systems Engineering
-- Hardware Design and Development
-- PCB Design and Testing
-- Electronics Product Development
-- Firmware and Software Development
-- Communication Systems
+## ⚙️ System Working Principle
 
-## 📫 Connect With Me
+The overall system is designed around the following workflow:
 
-- GitHub: [PranjalBangera](https://github.com/PranjalBangera)
+1. **Motion Sensing:** The wearable hardware captures motion-related information.
+2. **Data Processing:** Embedded software processes the collected information.
+3. **Activity Monitoring:** Movement data is used for step-counting functionality.
+4. **Fall Analysis:** Motion information is analyzed for fall-related events.
+5. **Application Integration:** The associated application provides the software interface.
+
+*Refer to the implementation files and project documentation for the actual hardware configuration and processing details.*
+
+## 🧪 Testing & Validation
+
+Project validation includes the relevant hardware and software testing activities.
+
+- Hardware functionality testing
+- Embedded software verification
+- Motion monitoring evaluation
+- Step-counting evaluation
+- Fall-analysis testing
+- PCB design verification
+
+## 🛠️ Technical Skills Demonstrated
+
+- Electronics and Hardware Development
+- Embedded Systems
+- Microcontroller Programming
+- PCB Design
+- Application Development
+- Hardware–Software Integration
+- Testing and Debugging
+
+## 📈 Future Improvements
+
+- Improve motion-monitoring accuracy.
+- Enhance step-counting performance.
+- Improve fall-analysis reliability.
+- Optimize wearable hardware design.
+- Enhance application functionality.
+- Improve overall hardware and software integration.
+
+## 📁 Project Resources
+
+- [Main Project Files](./Vihara-Band-main/)
+- [Application Files](./Vihara-Band-Application-main/)
+- [Updated PCB Design](./updated%20pcb/)
+- [Internship Documentation](./Zilliot_Internship.pdf)
+
+## 👨‍💻 Author
+
+**Pranjal Bangera**
+
+Electronics and Communication Engineering  
+Advanced Communication Technology
+
+GitHub: [PranjalBangera](https://github.com/PranjalBangera)
 
 ---
 
-⭐ Thank you for visiting my engineering portfolio!
+⭐ Thank you for visiting the Vihara Band project repository!
+
+**Vihara Band | Hardware • Embedded Software • PCB Design • Application Development**
