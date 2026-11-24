@@ -1,0 +1,362 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "588ae6d6-ba5e-4b69-918b-5b29186af23b")
+	(paper "A4")
+	(title_block
+		(title "Medical Wearable Patch")
+		(date "2026-08-29")
+		(rev "v1.0.0.0")
+		(company "Zilliot Technologies")
+	)
+	(lib_symbols)
+	(text "Page Settings "
+		(exclude_from_sim no)
+		(at 205.994 175.006 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(thickness 0.254)
+				(bold yes)
+			)
+		)
+		(uuid "14127f13-6229-469c-ad30-cae5f8768cf9")
+	)
+	(text "BMA 400\n"
+		(exclude_from_sim no)
+		(at 70.358 98.552 0)
+		(effects
+			(font
+				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
+				(color 12 35 255 1)
+			)
+		)
+		(uuid "8d7d03b6-347e-442e-aeea-3f2b7c775bab")
+	)
+	(text "EFR32BG22"
+		(exclude_from_sim no)
+		(at 153.924 99.314 0)
+		(effects
+			(font
+				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
+				(color 15 44 255 1)
+			)
+		)
+		(uuid "948f53dc-d645-4858-a48a-2c5b0f207ec6")
+	)
+	(text "POWER\n"
+		(exclude_from_sim no)
+		(at 222.25 98.806 0)
+		(effects
+			(font
+				(face "KiCad Font")
+				(size 2.794 2.794)
+				(thickness 0.5588)
+				(bold yes)
+				(color 0 0 255 1)
+			)
+		)
+		(uuid "abaab65b-c579-41ad-818e-51c9db5ade76")
+	)
+	(junction
+		(at 127 83.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0edf234b-4706-4e4e-bc69-2fd70ee09662")
+	)
+	(wire
+		(pts
+			(xy 100.33 83.82) (xy 127 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34d95ebf-44be-4a9d-b0af-223842a79337")
+	)
+	(wire
+		(pts
+			(xy 100.33 104.14) (xy 127 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5c644eb8-efd4-477c-aac9-bec1d96983c2")
+	)
+	(wire
+		(pts
+			(xy 100.33 92.71) (xy 127 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6db3c522-4c43-4fb3-a3ef-66a08c5eb47a")
+	)
+	(wire
+		(pts
+			(xy 127 83.82) (xy 196.85 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74e8dbc5-5d18-45da-9039-20e1493948a9")
+	)
+	(wire
+		(pts
+			(xy 100.33 113.03) (xy 127 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c442fc70-6d10-4a34-8ac5-cefbef274eb3")
+	)
+	(sheet
+		(at 196.85 74.93)
+		(size 53.34 46.99)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(fill
+			(color 255 159 71 1)
+		)
+		(uuid "300e582e-4ba6-4c53-850b-4f505a929d9d")
+		(property "Sheetname" "Power"
+			(at 196.85 74.2184 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Power .kicad_sch"
+			(at 196.85 122.5046 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "3V" output
+			(at 196.85 83.82 180)
+			(uuid "b37a8776-fef3-4270-b679-e2928f429e27")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "Medical Wearable Patch recovered"
+				(path "/588ae6d6-ba5e-4b69-918b-5b29186af23b"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 127 75.565)
+		(size 55.88 46.355)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 164 238 255 1)
+		)
+		(uuid "366b3e5c-2ba0-4db1-9f99-3655b5c2bff7")
+		(property "Sheetname" "BG22"
+			(at 127 74.8534 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MCU.kicad_sch"
+			(at 127 122.5046 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "3V" input
+			(at 127 83.82 180)
+			(uuid "14e5b3ed-274f-45e0-95d5-147be7bbe483")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "Alert" bidirectional
+			(at 127 113.03 180)
+			(uuid "bfd37252-88b0-4071-96f0-71d97a9bcb48")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SDA" bidirectional
+			(at 127 92.71 180)
+			(uuid "75145c4d-b21e-44f5-b1ea-6a7620187a58")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SCL" bidirectional
+			(at 127 104.14 180)
+			(uuid "74b82acd-be55-4ff4-9f8b-3f7aa26e230c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "Medical Wearable Patch recovered"
+				(path "/588ae6d6-ba5e-4b69-918b-5b29186af23b"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 43.18 76.2)
+		(size 57.15 45.72)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 254 154 255 1)
+		)
+		(uuid "4e7919e3-64c5-4c49-abb2-66865dcdd680")
+		(property "Sheetname" "Temperature_Sensor"
+			(at 43.18 75.4884 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Temp_Sensor.kicad_sch"
+			(at 43.18 122.5046 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "3V" input
+			(at 100.33 83.82 0)
+			(uuid "ba60a11a-abae-4aaf-a77d-b904d376fb98")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "Alert" bidirectional
+			(at 100.33 113.03 0)
+			(uuid "bdffa682-4067-40c1-aa0d-e1bbf6aad8ec")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SCL" bidirectional
+			(at 100.33 104.14 0)
+			(uuid "4329271b-7c63-47b8-aa64-d1f8f3cd235d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SDA" bidirectional
+			(at 100.33 92.71 0)
+			(uuid "0a190ac6-3a8c-490d-bcb9-7cf58be634e1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "Medical Wearable Patch recovered"
+				(path "/588ae6d6-ba5e-4b69-918b-5b29186af23b"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

@@ -1,0 +1,6 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "footprints") (type "KiCad") (uri "${KIPRJMOD}/footprints.pretty") (options "") (descr ""))
+	(lib (name "BMA400") (type "KiCad") (uri "${KIPRJMOD}/BMA400/BMA400.pretty") (options "") (descr ""))
+	(lib (name "IS25LP064A-JKLE-TR") (type "KiCad") (uri "${KIPRJMOD}/IS25LP064A-JKLE-TR") (options "") (descr ""))
+)

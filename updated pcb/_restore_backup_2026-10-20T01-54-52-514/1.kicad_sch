@@ -1,0 +1,11 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "fd401e0e-c2f6-4980-9932-63d79335418c")
+	(paper "A4")
+	(title_block
+		(title "Medical Wearable Patch")
+	)
+	(lib_symbols)
+)

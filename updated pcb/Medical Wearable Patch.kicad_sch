@@ -1,0 +1,254 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "588ae6d6-ba5e-4b69-918b-5b29186af23b")
+	(paper "A4")
+	(title_block
+		(title "Medical Wearable Patch")
+		(date "05-02-2026")
+		(rev "2")
+		(company "Zilliot Technologies")
+	)
+	(lib_symbols)
+	(text "TEMPERATURE SENSOR"
+		(exclude_from_sim no)
+		(at 81.788 94.742 0)
+		(effects
+			(font
+				(size 3 3)
+				(thickness 0.254)
+				(bold yes)
+				(color 12 35 255 1)
+			)
+		)
+		(uuid "8d7d03b6-347e-442e-aeea-3f2b7c775bab")
+	)
+	(text "EFR32BG22"
+		(exclude_from_sim no)
+		(at 165.354 95.504 0)
+		(effects
+			(font
+				(size 3 3)
+				(thickness 0.254)
+				(bold yes)
+				(color 15 44 255 1)
+			)
+		)
+		(uuid "948f53dc-d645-4858-a48a-2c5b0f207ec6")
+	)
+	(wire
+		(pts
+			(xy 111.76 80.01) (xy 138.43 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34d95ebf-44be-4a9d-b0af-223842a79337")
+	)
+	(wire
+		(pts
+			(xy 111.76 100.33) (xy 138.43 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5c644eb8-efd4-477c-aac9-bec1d96983c2")
+	)
+	(wire
+		(pts
+			(xy 111.76 88.9) (xy 138.43 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6db3c522-4c43-4fb3-a3ef-66a08c5eb47a")
+	)
+	(wire
+		(pts
+			(xy 111.76 109.22) (xy 138.43 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c442fc70-6d10-4a34-8ac5-cefbef274eb3")
+	)
+	(sheet
+		(at 138.43 71.755)
+		(size 55.88 46.355)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 164 238 255 1.0000)
+		)
+		(uuid "366b3e5c-2ba0-4db1-9f99-3655b5c2bff7")
+		(property "Sheetname" "BG22"
+			(at 138.43 71.0434 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Sheetfile" "MCU.kicad_sch"
+			(at 138.43 118.6946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "3V" output
+			(at 138.43 80.01 180)
+			(uuid "14e5b3ed-274f-45e0-95d5-147be7bbe483")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "Alert" bidirectional
+			(at 138.43 109.22 180)
+			(uuid "bfd37252-88b0-4071-96f0-71d97a9bcb48")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SDA" bidirectional
+			(at 138.43 88.9 180)
+			(uuid "75145c4d-b21e-44f5-b1ea-6a7620187a58")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SCL" bidirectional
+			(at 138.43 100.33 180)
+			(uuid "74b82acd-be55-4ff4-9f8b-3f7aa26e230c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "Medical Wearable Patch"
+				(path "/588ae6d6-ba5e-4b69-918b-5b29186af23b"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 54.61 72.39)
+		(size 57.15 45.72)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 254 154 255 1.0000)
+		)
+		(uuid "4e7919e3-64c5-4c49-abb2-66865dcdd680")
+		(property "Sheetname" "Temperature_Sensor"
+			(at 54.61 71.6784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Sheetfile" "Temp_Sensor.kicad_sch"
+			(at 54.61 118.6946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "3V" input
+			(at 111.76 80.01 0)
+			(uuid "ba60a11a-abae-4aaf-a77d-b904d376fb98")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "Alert" bidirectional
+			(at 111.76 109.22 0)
+			(uuid "bdffa682-4067-40c1-aa0d-e1bbf6aad8ec")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SCL" bidirectional
+			(at 111.76 100.33 0)
+			(uuid "4329271b-7c63-47b8-aa64-d1f8f3cd235d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SDA" bidirectional
+			(at 111.76 88.9 0)
+			(uuid "0a190ac6-3a8c-490d-bcb9-7cf58be634e1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "Medical Wearable Patch"
+				(path "/588ae6d6-ba5e-4b69-918b-5b29186af23b"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)
