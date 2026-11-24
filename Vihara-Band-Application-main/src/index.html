@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Vihara Band</title>
+  <meta name="description"
+    content="Vihara Band companion app — activity tracking, fall detection, SOS alerts, insights and full band control.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('vihara-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', t === 'light' ? '#F2F3F7' : '#0A0A0F');
+      } catch(e) {}
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- ═══════════════════════════ CINEMATIC UNIQUE STARTUP SPLASH ANIMATION ═══════════════════════════ -->
+    <div id="startup-splash" class="startup-splash">
+      <div class="splash-ambient-bg"></div>
+
+      <!-- Ambient Biometric Particles -->
+      <div class="splash-particles">
+        <div class="splash-particle p1"></div>
+        <div class="splash-particle p2"></div>
+        <div class="splash-particle p3"></div>
+        <div class="splash-particle p4"></div>
+      </div>
+
+      <div class="splash-content">
+        <!-- Dual Counter-Rotating Logo Rings -->
+        <div class="splash-logo-container">
+          <div class="splash-logo-aura"></div>
+          <div class="splash-logo-ring-outer"></div>
+          <div class="splash-logo-ring-inner"></div>
+          <div class="splash-logo-core"></div>
+        </div>
+
+        <!-- Typography Reveal -->
+        <h1 class="splash-title">VIHARA <span>BAND</span></h1>
+        <div class="splash-divider"></div>
+        <p class="splash-tagline">Minimal. Mindful. Moving.</p>
+
+        <!-- Progress Beam & Dynamic Diagnostic Status -->
+        <div class="splash-progress-wrapper">
+          <div class="splash-progress-bar">
+            <div class="splash-progress-fill"></div>
+            <div class="splash-progress-glow-head"></div>
+          </div>
+          <span class="splash-status-text" id="splash-status-lbl">Initializing Biometric Telemetry...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ WELCOME / AUTH SCREEN ═══════════════════════════ -->
+    <div id="screen-welcome" class="screen screen--welcome active">
+      <div class="welcome-wrap">
+        
+        <!-- Ambient decorative background element -->
+        <div class="welcome-glow"></div>
+
+        <!-- Brand identity -->
+        <div class="welcome-brand">
+          <div class="brand-logo-mark welcome-logo">
+            <div class="logo-ring"></div>
+            <div class="logo-dot-inner"></div>
+          </div>
+          <h1 class="brand-name">VIHARA<br><span>BAND</span></h1>
+          <p class="brand-tagline">Minimal. Mindful. Moving.</p>
+        </div>
+
+        <!-- Hero Highlights -->
+        <div class="welcome-highlights">
+          <div class="feature-item">
+            <div class="feat-icon">⚡</div>
+            <div class="feat-text">
+              <span class="feat-title">Biometric Telemetry</span>
+              <span class="feat-desc">Precision steps, distance & active calories</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feat-icon">🛡️</div>
+            <div class="feat-text">
+              <span class="feat-title">Autonomous Safety</span>
+              <span class="feat-desc">On-device fall detection & automated emergency SOS</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feat-icon">📈</div>
+            <div class="feat-text">
+              <span class="feat-title">Clinical Longevity Goals</span>
+              <span class="feat-desc">Science-backed cardiovascular step targets</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="welcome-actions">
+          <button class="btn-google-login" id="btn-welcome-google" onclick="loginWithGoogle()">
+            <div class="google-login-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+            </div>
+            <span>Continue with Google</span>
+          </button>
+
+          <button class="btn-demo-mode" onclick="enterDemoMode()" style="padding: 13px 0; font-size: 14px;">
+            <span>Explore Demo Mode</span>
+          </button>
+          <button class="btn-guest-login" onclick="loginAsGuest()">
+            <span>Continue as Guest</span>
+          </button>
+
+          <p class="welcome-disclaimer">
+            Encrypted biometric profile. No third-party data tracking.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ PAIRING ═══════════════════════════ -->
+    <div id="screen-pairing" class="screen screen--pairing">
+      <div class="pairing-wrap">
+        <div class="pairing-brand">
+          <div class="brand-logo-mark" onclick="handleLogoTap()">
+            <div class="logo-ring"></div>
+            <div class="logo-dot-inner"></div>
+          </div>
+          <h1 class="brand-name">VIHARA<br><span>BAND</span></h1>
+          <p class="brand-tagline">Minimal. Mindful. Moving.</p>
+        </div>
+        <div class="band-scene">
+          <div class="scan-ring scan-ring--1"></div>
+          <div class="scan-ring scan-ring--2"></div>
+          <div class="scan-ring scan-ring--3"></div>
+          <div class="band-3d">
+            <div class="band-strap band-strap--top"></div>
+            <div class="band-body-3d">
+              <div class="band-led-3d" id="pairing-led"></div>
+              <div class="band-btn-3d"></div>
+            </div>
+            <div class="band-strap band-strap--bot"></div>
+          </div>
+        </div>
+        <!-- Inline Scan and Device Picker -->
+        <div id="pair-state-scan" class="pair-state">
+          <div class="searching-label" id="scan-status-container">
+            <div class="pulse-dots"><span></span><span></span><span></span></div>
+            <p id="scan-status-text">Scanning for Vihara Band...</p>
+          </div>
+          
+          <!-- Discovered Devices List -->
+          <div id="device-list-container" class="device-list" style="margin-top: 15px; width: 100%; max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <div style="width: 100%; margin-top: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn-outline" id="rescan-btn" onclick="startInlineScan()" style="width: 100%; margin: 0; padding: 13px 0; font-size: 13.5px; font-weight: 600; border-radius: var(--r-md);">
+              <span>Rescan for Devices</span>
+            </button>
+            <button class="btn-demo-mode" id="btn-demo-mode" onclick="enterDemoMode()">
+              <span>Demo Mode</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="pair-state-connecting" class="pair-state hidden">
+          <div class="connecting-wrap">
+            <div class="connecting-spinner"></div>
+            <p id="connecting-status-label">Connecting to Vihara Band...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ MAIN APP ═══════════════════════════ -->
+    <div id="main-app" class="hidden">
+
+      <!-- ═══════ DASHBOARD ═══════ -->
+      <div id="screen-dashboard" class="screen-main screen-main--active">
+        <div class="scroll-area">
+          <div class="dash-header">
+            <div>
+              <p class="dash-greeting" id="dash-greeting">Good Morning</p>
+              <h2 class="dash-name" id="dash-name" onclick="openProfileModal()">Welcome 👋</h2>
+            </div>
+            <div class="dash-chips">
+              <div class="chip chip--battery">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="18" height="10" rx="2" />
+                  <path d="M22 11v2" />
+                </svg>
+                <span id="dash-bat">75%</span>
+              </div>
+              <div class="chip chip--ble"><span class="ble-dot"></span><span>Connected</span></div>
+            </div>
+          </div>
+
+          <!-- Activity Ring -->
+          <div class="ring-card">
+            <div class="ring-wrap">
+              <svg class="ring-svg" viewBox="0 0 220 220">
+                <circle class="ring-track ring-track-steps" cx="110" cy="110" r="90" fill="none" stroke-width="14" />
+                <circle class="ring-track ring-track-cals" cx="110" cy="110" r="70" fill="none" stroke-width="11" />
+                <circle class="ring-track ring-track-act" cx="110" cy="110" r="50" fill="none" stroke-width="9" />
+                <circle id="ring-steps" cx="110" cy="110" r="90" fill="none" stroke="url(#g-steps)" stroke-width="14"
+                  stroke-dasharray="565.49" stroke-dashoffset="565.49" stroke-linecap="round"
+                  transform="rotate(-90 110 110)" />
+                <circle id="ring-cals" cx="110" cy="110" r="70" fill="none" stroke="url(#g-cals)" stroke-width="11"
+                  stroke-dasharray="439.82" stroke-dashoffset="439.82" stroke-linecap="round"
+                  transform="rotate(-90 110 110)" />
+                <circle id="ring-act" cx="110" cy="110" r="50" fill="none" stroke="url(#g-act)" stroke-width="9"
+                  stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round"
+                  transform="rotate(-90 110 110)" />
+                <defs>
+                  <linearGradient id="g-steps" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="var(--ring-steps-1)" />
+                    <stop offset="100%" stop-color="var(--ring-steps-2)" />
+                  </linearGradient>
+                  <linearGradient id="g-cals" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="var(--ring-cals-1)" />
+                    <stop offset="100%" stop-color="var(--ring-cals-2)" />
+                  </linearGradient>
+                  <linearGradient id="g-act" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="var(--ring-act-1)" />
+                    <stop offset="100%" stop-color="var(--ring-act-2)" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="ring-center">
+                <span class="ring-val" id="ring-step-val">0</span>
+                <span class="ring-lbl">steps today</span>
+                <span class="ring-goal" id="ring-step-goal">/ 10,000 goal</span>
+              </div>
+            </div>
+            <div class="ring-legend">
+              <div class="legend-row"><span class="legend-dot" style="--c:var(--ring-steps-1)"></span><span id="leg-steps-val">Steps 0%</span></div>
+              <div class="legend-row"><span class="legend-dot" style="--c:var(--ring-cals-1)"></span><span id="leg-cals-val">Calories 0%</span></div>
+              <div class="legend-row"><span class="legend-dot" style="--c:var(--ring-act-1)"></span><span id="leg-act-val">Active 0%</span></div>
+            </div>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon" style="--ic:#00C896"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg></div>
+              <div class="stat-val" id="sv-steps">0</div>
+              <div class="stat-lbl">Steps</div>
+              <div class="stat-bar">
+                <div class="stat-bar__fill" id="sb-steps" style="--pct:0%;--c:#00C896"></div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="--ic:#4ECDC4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path
+                    d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg></div>
+              <div class="stat-val" id="sv-dist">0.0<small>km</small></div>
+              <div class="stat-lbl">Distance</div>
+              <div class="stat-bar">
+                <div class="stat-bar__fill" id="sb-dist" style="--pct:0%;--c:#4ECDC4"></div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="--ic:#FF6B6B"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14z" />
+                </svg></div>
+              <div class="stat-val" id="sv-cal">0<small>kcal</small></div>
+              <div class="stat-lbl">Calories</div>
+              <div class="stat-bar">
+                <div class="stat-bar__fill" id="sb-cal" style="--pct:0%;--c:#FF6B6B"></div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="--ic:#6B8FFF"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg></div>
+              <div class="stat-val" id="sv-act">0<small>min</small></div>
+              <div class="stat-lbl">Active</div>
+              <div class="stat-bar">
+                <div class="stat-bar__fill" id="sb-act" style="--pct:0%;--c:#6B8FFF"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insights Preview Card -->
+          <div class="insight-preview-card" onclick="showScreen('insights')">
+            <div class="ip-icon">💡</div>
+            <div class="ip-text">
+              <div class="ip-title">Weekly Insight</div>
+              <div class="ip-sub" id="dash-insight-text">Sync your band to record today's activity</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="section-label">Quick Actions</div>
+          <div class="quick-grid">
+            <button class="qa-btn" onclick="syncData()" id="qa-sync">
+              <div class="qa-icon" style="--ic:#00C896"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <polyline points="1 4 1 10 7 10" />
+                  <polyline points="23 20 23 14 17 14" />
+                  <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" />
+                </svg></div>
+              <span>Sync</span>
+            </button>
+            <button class="qa-btn" onclick="showScreen('sos')">
+              <div class="qa-icon" style="--ic:#FF6B6B"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0" />
+                </svg></div>
+              <span>SOS</span>
+            </button>
+            <button class="qa-btn" onclick="showScreen('fall')">
+              <div class="qa-icon" style="--ic:#FFD93D"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M14.5 6.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM20 18h-2l-1-4-3 3v3h-2v-4l3-4-1-3-3 2v-2l4-2 1.5 3.5 2.5-1.5 1 3" />
+                </svg></div>
+              <span>Fall</span>
+            </button>
+            <button class="qa-btn" onclick="showScreen('insights')">
+              <div class="qa-icon" style="--ic:#9B59B6"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg></div>
+              <span>Insights</span>
+            </button>
+          </div>
+
+          <!-- Today's Timeline -->
+          <div class="section-label">Today's Timeline</div>
+          <div class="glass-card timeline-card">
+            <div class="timeline-bars" id="timeline-bars"></div>
+            <div class="timeline-xlabels">
+              <span>6AM</span><span>10AM</span><span>2PM</span><span>6PM</span><span>10PM</span>
+            </div>
+            <div class="timeline-summary">
+              <div class="ts-item"><span class="ts-lbl">Peak</span><span class="ts-val">9:00 AM</span></div>
+              <div class="ts-item"><span class="ts-lbl">Sedentary</span><span class="ts-val">2h 15m</span></div>
+              <div class="ts-item"><span class="ts-lbl">Synced</span><span class="ts-val" id="last-sync-lbl">Just
+                  now</span></div>
+            </div>
+          </div>
+
+          <!-- Recent Achievements -->
+          <div class="section-label">Recent Badges <span class="section-count" id="badge-count-dash">3/12</span></div>
+          <div class="badges-row" id="badges-dash"></div>
+
+          <div class="bottom-pad"></div>
+        </div>
+      </div>
+
+      <!-- ═══════ ACTIVITY ═══════ -->
+      <div id="screen-activity" class="screen-main">
+        <div class="scroll-area">
+          <div class="page-header">
+            <h2>Activity</h2>
+          </div>
+
+          <!-- Tabs -->
+          <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('act','day',this)">Today</button>
+            <button class="tab-btn" onclick="switchTab('act','week',this)">Week</button>
+            <button class="tab-btn" onclick="switchTab('act','month',this)">Month</button>
+          </div>
+
+          <!-- Day Tab -->
+          <div id="act-tab-day" class="tab-content">
+            <div class="glass-card" style="margin-bottom:12px">
+              <div class="card-label-row"><span class="card-lbl">Today's Breakdown</span><span class="card-val-accent"
+                  id="day-date-lbl"></span></div>
+              <div class="day-stats-list">
+                <div class="dsl-row"><span class="dsl-lbl">🦶 Steps</span><span class="dsl-val"
+                    id="day-steps">0</span></div>
+                <div class="dsl-row"><span class="dsl-lbl">📍 Distance</span><span class="dsl-val" id="day-dist">0.00 km</span></div>
+                <div class="dsl-row"><span class="dsl-lbl">🔥 Calories</span><span class="dsl-val" id="day-cal">0 kcal</span></div>
+                <div class="dsl-row"><span class="dsl-lbl">⏱ Active Time</span><span class="dsl-val" id="day-act">0 min</span></div>
+                <div class="dsl-row"><span class="dsl-lbl">💤 Sedentary</span><span class="dsl-val">0 min</span></div>
+                <div class="dsl-row"><span class="dsl-lbl">🏆 Goal Progress</span><span class="dsl-val"
+                    id="day-goal-pct" style="color:var(--accent)">0%</span></div>
+              </div>
+            </div>
+            <div class="glass-card">
+              <div class="card-label-row"><span class="card-lbl">Hourly Activity</span></div>
+              <div class="timeline-bars" id="act-timeline-bars"></div>
+              <div class="timeline-xlabels">
+                <span>6AM</span><span>10AM</span><span>2PM</span><span>6PM</span><span>10PM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Week Tab -->
+          <div id="act-tab-week" class="tab-content hidden">
+            <div class="glass-card">
+              <div class="card-label-row"><span class="card-lbl">Weekly Steps</span><span class="card-val-accent" id="week-avg-lbl">0 avg</span></div>
+              <div class="bar-chart" id="weekly-chart"></div>
+              <div class="chart-days">
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+              </div>
+            </div>
+            <div class="section-label" style="margin-top:16px">Week Summary</div>
+            <div class="stats-grid">
+              <div class="stat-card mini">
+                <div class="stat-val" style="font-size:18px" id="week-summary-avg">0</div>
+                <div class="stat-lbl">Avg Steps</div>
+              </div>
+              <div class="stat-card mini">
+                <div class="stat-val" style="font-size:18px" id="week-summary-dist">0.0<small>km</small></div>
+                <div class="stat-lbl">Distance</div>
+              </div>
+              <div class="stat-card mini">
+                <div class="stat-val" style="font-size:18px" id="week-summary-cal">0<small>kcal</small></div>
+                <div class="stat-lbl">Calories</div>
+              </div>
+              <div class="stat-card mini">
+                <div class="stat-val" style="font-size:18px" id="week-summary-act">0<small>min</small></div>
+                <div class="stat-lbl">Active</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Month Tab -->
+          <div id="act-tab-month" class="tab-content hidden">
+            <div class="glass-card">
+              <div class="card-label-row"><span class="card-lbl">Monthly Heatmap</span><span class="card-val-accent"
+                  id="month-lbl"></span></div>
+              <div class="calendar-weekdays">
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+              </div>
+              <div class="calendar-grid" id="month-calendar"></div>
+              <div class="cal-legend">
+                <span>Low</span>
+                <div class="cal-legend-blocks">
+                  <div style="background:rgba(0,200,150,.1)"></div>
+                  <div style="background:rgba(0,200,150,.3)"></div>
+                  <div style="background:rgba(0,200,150,.55)"></div>
+                  <div style="background:rgba(0,200,150,.8)"></div>
+                  <div style="background:#00C896"></div>
+                </div>
+                <span>High</span>
+              </div>
+            </div>
+            <div class="section-label" style="margin-top:16px">Month Total</div>
+            <div class="stats-grid">
+              <div class="stat-card mini">
+                <div class="stat-val" style="font-size:18px" id="month-total-steps">0</div>
+                <div class="stat-lbl">Total Steps</div>
+              </div>
+              <div class="stat-card mini">
+                <div class="stat-val" style="font-size:18px" id="month-total-dist">0<small>km</small></div>
+                <div class="stat-lbl">Distance</div>
+              </div>
+              <div class="stat-card mini">
+                <div class="stat-val" style="font-size:18px" id="month-total-cal">0<small>kcal</small></div>
+                <div class="stat-lbl">Calories</div>
+              </div>
+              <div class="stat-card mini">
+                <div class="stat-val" style="font-size:18px" id="month-goal-days">0<small>/0</small></div>
+                <div class="stat-lbl">Goal Days</div>
+              </div>
+            </div>
+            <button class="btn-outline" style="margin-top:12px" onclick="exportCSV()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Export Activity Data (CSV)
+            </button>
+          </div>
+
+          <!-- Sedentary Alerts -->
+          <div class="section-label">Sedentary Settings</div>
+          <div class="glass-card">
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Enable Alerts</div>
+                <div class="sd">Remind me to move when inactive</div>
+              </div>
+              <label class="toggle"><input type="checkbox" checked id="sedentary-toggle"><span
+                  class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Alert Threshold</div>
+                <div class="sd">Alert after inactivity period</div>
+              </div>
+              <select class="sel-input">
+                <option>30 min</option>
+                <option selected>60 min</option>
+                <option>90 min</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Quiet Hours</div>
+                <div class="sd">No alerts 10 PM – 6 AM</div>
+              </div>
+              <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+          </div>
+
+          <div class="bottom-pad"></div>
+        </div>
+      </div>
+
+      <!-- ═══════ SOS ═══════ -->
+      <div id="screen-sos" class="screen-main">
+        <div class="scroll-area">
+          <div class="page-header">
+            <h2>SOS &amp; Safety</h2>
+          </div>
+
+          <!-- SOS Hero -->
+          <div class="sos-hero-wrap">
+            <div class="sos-outer-ring">
+              <div class="sos-inner-ring">
+                <button class="sos-btn" id="sos-btn" onmousedown="startSOS()" onmouseup="cancelSOS()"
+                  onmouseleave="cancelSOS()" ontouchstart="startSOS(event)" ontouchend="cancelSOS()">
+                  <span class="sos-txt">SOS</span>
+                  <span class="sos-sub">Hold 3 sec</span>
+                </button>
+              </div>
+            </div>
+            <div class="sos-progress-wrap">
+              <div class="sos-progress-track">
+                <div class="sos-progress-fill" id="sos-prog-fill"></div>
+              </div>
+              <span class="sos-prog-lbl" id="sos-prog-lbl">Hold for 3 seconds to send alert</span>
+            </div>
+            <p class="sos-hint">Sends your location + SOS message to all emergency contacts</p>
+          </div>
+
+          <!-- Custom SOS Message -->
+          <div class="section-label">SOS Message</div>
+          <div class="glass-card">
+            <div class="sn" style="margin-bottom:8px">Auto-sent message to contacts</div>
+            <textarea class="form-inp" id="sos-message" rows="3"
+              style="resize:none;line-height:1.6">🚨 EMERGENCY: I may have fallen and need help. This is an automated SOS from my Vihara Band. Please call me immediately.</textarea>
+            <button class="btn-outline" style="margin-top:10px" onclick="saveSosMessage()">Save Message</button>
+          </div>
+
+          <!-- Emergency Alert Status (Commercial Wearable Shield Card) -->
+          <div id="sos-confirmation-card" class="glass-card" style="display:flex;align-items:flex-start;gap:12px;padding:14px;border-left:3px solid var(--accent);margin-top:14px;">
+            <div style="font-size:20px;line-height:1;margin-top:2px;">🛡️</div>
+            <div>
+              <div class="sn" style="font-size:13.5px;font-weight:600;color:var(--t1);margin-bottom:4px;">Emergency Protection Active</div>
+              <div id="sos-confirmation-desc" class="sd" style="font-size:12px;line-height:1.5;color:var(--t2);">Contacts will be called/texted automatically when SOS is activated or a fall is detected.</div>
+            </div>
+          </div>
+
+          <!-- Simulation / Demo Test Alert (Available in Demo Mode) -->
+          <div id="sos-test-container" style="display:none;margin-top:14px;">
+            <div class="section-label">Safety Demonstration Test</div>
+            <div class="glass-card">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="sn">Send Simulation Alert</div>
+                  <div class="sd">Test notification dispatch flow for presentation demo</div>
+                </div>
+                <button class="btn-test" onclick="sendTestAlert()">Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Contacts -->
+          <div class="section-label">Emergency Contacts <span class="section-count" id="contacts-count">2/3</span></div>
+          <div id="contacts-list" class="contacts-list"></div>
+          <button class="btn-outline" id="add-contact-btn" onclick="showAddContact()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Add Emergency Contact
+          </button>
+
+          <!-- Alert History -->
+          <div class="section-label">Alert History</div>
+          <div class="glass-card" id="alert-history">
+            <div class="empty-state">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8A8F9C" stroke-width="1.5">
+                <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0" />
+              </svg>
+              <p>No alerts sent yet</p>
+            </div>
+          </div>
+
+          <div class="bottom-pad"></div>
+        </div>
+      </div>
+
+      <!-- ═══════ FALL DETECTION ═══════ -->
+      <div id="screen-fall" class="screen-main">
+        <div class="scroll-area">
+          <div class="page-header">
+            <h2>Fall Detection</h2>
+          </div>
+
+          <div class="fall-hero" id="fall-hero">
+            <div class="fall-hero__icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14.5 6.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                <path d="M20 18h-2l-1-4-3 3v3h-2v-4l3-4-1-3-3 2v-2l4-2 1.5 3.5 2.5-1.5 1 3" />
+              </svg>
+            </div>
+            <div class="fall-hero__text">
+              <h3 id="fall-hero-title">Fall Detection Active</h3>
+              <p id="fall-hero-sub">Monitoring for sudden impacts</p>
+            </div>
+            <label class="toggle"><input type="checkbox" checked id="fall-toggle" onchange="toggleFall(this)"><span
+                class="slider"></span></label>
+          </div>
+
+          <!-- Sensitivity -->
+          <div class="section-label">Detection Sensitivity</div>
+          <div class="glass-card">
+            <div class="sens-btns">
+              <button class="sens-btn" onclick="setSens(this,'Low')">Low</button>
+              <button class="sens-btn active" onclick="setSens(this,'Medium')">Medium</button>
+              <button class="sens-btn" onclick="setSens(this,'High')">High</button>
+            </div>
+            <p class="sens-desc" id="sens-desc">Detects significant falls. Recommended for most users.</p>
+          </div>
+
+          <!-- Response Settings -->
+          <div class="section-label">Response Settings</div>
+          <div class="glass-card">
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Auto-Cancel Window</div>
+                <div class="sd">Time to cancel false alarm after fall</div>
+              </div>
+              <select class="sel-input" id="cancel-window">
+                <option>30 sec</option>
+                <option selected>60 sec</option>
+                <option>90 sec</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">LED Flash on Fall</div>
+                <div class="sd">Red LED when fall is detected</div>
+              </div>
+              <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Auto-Share Location</div>
+                <div class="sd">Send GPS location to contacts</div>
+              </div>
+              <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+          </div>
+
+          <!-- Simulate Fall (for testing) -->
+          <div class="section-label">Testing</div>
+          <div class="glass-card">
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Simulate Fall Alert</div>
+                <div class="sd">Test the full fall detection & alert flow</div>
+              </div>
+              <button class="btn-test"
+                style="background:rgba(255,107,107,.15);color:var(--red);border-color:rgba(255,107,107,.3)"
+                onclick="simulateFall()">Simulate</button>
+            </div>
+          </div>
+
+          <!-- Fall History -->
+          <div class="section-label">Fall History <span class="section-count" id="fall-count">0 this month</span></div>
+          <div class="glass-card" id="fall-events">
+            <div class="empty-state">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00C896" stroke-width="1.5">
+                <polyline points="22 4 12 14.01 9 11.01" />
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              <p>No falls detected — you're safe!</p>
+            </div>
+          </div>
+
+          <div class="bottom-pad"></div>
+        </div>
+      </div>
+
+      <!-- ═══════ INSIGHTS ═══════ -->
+      <div id="screen-insights" class="screen-main">
+        <div class="scroll-area">
+          <div class="page-header">
+            <h2>Insights</h2><span class="header-pill">Powered by data</span>
+          </div>
+
+          <!-- Insight Tabs -->
+          <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('ins','overview',this)">Overview</button>
+            <button class="tab-btn" onclick="switchTab('ins','trends',this)">Trends</button>
+            <button class="tab-btn" onclick="switchTab('ins','badges',this)">Badges</button>
+          </div>
+
+          <!-- Overview Tab -->
+          <div id="ins-tab-overview" class="tab-content">
+            <!-- Weekly Summary Cards -->
+            <div class="section-label">This Week's Summary</div>
+            <div class="insight-summary-grid">
+              <div class="ins-summary-card" style="--ac:#00C896">
+                <div class="isc-val" id="ins-week-steps">0</div>
+                <div class="isc-lbl">Total Steps</div>
+                <div class="isc-delta" id="ins-week-steps-delta">--</div>
+              </div>
+              <div class="ins-summary-card" style="--ac:#4ECDC4">
+                <div class="isc-val" id="ins-week-dist">0.0km</div>
+                <div class="isc-lbl">Distance</div>
+                <div class="isc-delta" id="ins-week-dist-delta">--</div>
+              </div>
+              <div class="ins-summary-card" style="--ac:#6B8FFF">
+                <div class="isc-val" id="ins-week-time">0min</div>
+                <div class="isc-lbl">Active Time</div>
+                <div class="isc-delta" id="ins-week-time-delta">--</div>
+              </div>
+              <div class="ins-summary-card" style="--ac:#FF6B6B">
+                <div class="isc-val" id="ins-week-cal">0</div>
+                <div class="isc-lbl">Calories</div>
+                <div class="isc-delta" id="ins-week-cal-delta">--</div>
+              </div>
+            </div>
+
+            <!-- Personalized Recommendations -->
+            <div class="section-label">Personalized Recommendations</div>
+            <div class="reco-cards" id="reco-cards"></div>
+
+            <!-- Caregiver Preview -->
+            <div class="section-label">Caregiver Mode</div>
+            <div class="glass-card caregiver-card">
+              <div class="cgv-header">
+                <div class="cgv-icon">👥</div>
+                <div>
+                  <div class="sn">Share with Caregiver</div>
+                  <div class="sd">Let family members monitor your activity</div>
+                </div>
+                <label class="toggle"><input type="checkbox" id="caregiver-toggle"><span class="slider"></span></label>
+              </div>
+              <div class="cgv-report-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                  <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0" />
+                </svg>
+                <span>Daily summary notification sent to caregiver</span>
+              </div>
+              <div class="cgv-report-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                  <path
+                    d="M14.5 6.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM20 18h-2l-1-4-3 3v3h-2v-4l3-4-1-3-3 2v-2l4-2 1.5 3.5 2.5-1.5 1 3" />
+                </svg>
+                <span>Caregiver receives real-time fall alerts</span>
+              </div>
+              <div class="cgv-report-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span style="color:var(--t3)">Caregiver portal — coming in v2</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trends Tab -->
+          <div id="ins-tab-trends" class="tab-content hidden">
+            <div class="section-label">30-Day Step Trend</div>
+            <div class="glass-card">
+              <div class="trend-chart-wrap">
+                <svg id="trend-chart-svg" class="trend-chart" viewBox="0 0 300 120" preserveAspectRatio="none">
+                  <!-- Injected by JS -->
+                </svg>
+              </div>
+              <div class="trend-xlabels"><span>30d ago</span><span>15d ago</span><span>Today</span></div>
+            </div>
+
+            <!-- Comparison -->
+            <div class="section-label">Week-over-Week</div>
+            <div class="comparison-card">
+              <div class="cmp-col">
+                <div class="cmp-label">Last Week</div>
+                <div class="cmp-val" id="wow-last-total">0</div>
+                <div class="cmp-sub" id="wow-last-avg">avg steps/day: 0</div>
+              </div>
+              <div class="cmp-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+                <span class="cmp-delta" id="wow-delta">--</span>
+              </div>
+              <div class="cmp-col right">
+                <div class="cmp-label">This Week</div>
+                <div class="cmp-val" id="wow-this-total" style="color:var(--accent)">0</div>
+                <div class="cmp-sub" id="wow-this-avg">avg steps/day: 0</div>
+              </div>
+            </div>
+
+            <!-- Activity Patterns -->
+            <div class="section-label">Your Activity Patterns</div>
+            <div class="glass-card">
+              <div class="pattern-row">
+                <div class="pattern-icon">🌅</div>
+                <div class="pattern-info">
+                  <div class="sn">Most Active Time</div>
+                  <div class="sd" id="pat-active-time">Sync regularly to detect peak activity hours</div>
+                </div>
+              </div>
+              <div class="pattern-row">
+                <div class="pattern-icon">📅</div>
+                <div class="pattern-info">
+                  <div class="sn">Best Day</div>
+                  <div class="sd" id="pat-best-day">Recording steps to determine your best day</div>
+                </div>
+              </div>
+              <div class="pattern-row">
+                <div class="pattern-icon">💤</div>
+                <div class="pattern-info">
+                  <div class="sn">Movement Reminder</div>
+                  <div class="sd" id="pat-sedentary">Regular walking breaks help maintain cardiovascular health</div>
+                </div>
+              </div>
+              <div class="pattern-row">
+                <div class="pattern-icon">🎯</div>
+                <div class="pattern-info">
+                  <div class="sn">Goal Achievement</div>
+                  <div class="sd" id="pat-goal-achievement">Track daily to record goal progress</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badges Tab -->
+          <div id="ins-tab-badges" class="tab-content hidden">
+            <!-- Streak -->
+            <div class="streak-card">
+              <div class="streak-flame">🔥</div>
+              <div class="streak-info">
+                <div class="streak-num" id="streak-count">0</div>
+                <div class="streak-lbl">Day Streak</div>
+              </div>
+              <div class="streak-best">Best: <strong id="streak-best-val">0 days</strong></div>
+            </div>
+
+            <!-- Earned Badges -->
+            <div class="section-label">Earned Badges <span class="section-count" id="earned-count">0/12</span></div>
+            <div class="badges-grid" id="badges-grid"></div>
+
+            <!-- Lifetime Stats -->
+            <div class="section-label">Lifetime Stats</div>
+            <div class="glass-card">
+              <div class="lifetime-row"><span class="lr-lbl">Total Steps</span><span class="lr-val" id="life-total-steps">0</span></div>
+              <div class="lifetime-row"><span class="lr-lbl">Total Distance</span><span class="lr-val" id="life-total-dist">0.0 km</span>
+              </div>
+              <div class="lifetime-row"><span class="lr-lbl">Active Tracking</span><span class="lr-val" id="life-band-days">0 days</span>
+              </div>
+              <div class="lifetime-row"><span class="lr-lbl">Falls Detected</span><span class="lr-val" id="life-falls">0</span></div>
+              <div class="lifetime-row"><span class="lr-lbl">SOS Alerts Sent</span><span class="lr-val" id="life-sos">0</span></div>
+            </div>
+          </div>
+
+          <div class="bottom-pad"></div>
+        </div>
+      </div>
+
+      <!-- ═══════ DEVICE ═══════ -->
+      <div id="screen-device" class="screen-main">
+        <div class="scroll-area">
+          <div class="page-header">
+            <h2>Device</h2>
+          </div>
+          <div class="device-hero">
+            <div class="dev-band-wrap">
+              <div class="dev-strap dev-strap--top"></div>
+              <div class="dev-band-body">
+                <div class="dev-band-led" id="dev-led"></div>
+                <div class="dev-band-btn"></div>
+              </div>
+              <div class="dev-strap dev-strap--bot"></div>
+            </div>
+            <div class="device-hero-info">
+              <h3>Vihara Band</h3>
+              <div class="dev-status-row"><span class="badge-connected">● Connected</span><span class="dev-ble-lbl">BLE
+                  5.3</span></div>
+              <div class="dev-fw">Firmware v1.0.2</div>
+            </div>
+          </div>
+
+          <div class="section-label">Battery</div>
+          <div class="glass-card bat-card">
+            <div class="bat-visual">
+              <div class="bat-body">
+                <div class="bat-fill" id="bat-fill-large" style="width:75%"></div>
+              </div>
+              <div class="bat-tip"></div>
+            </div>
+            <div class="bat-detail">
+              <div class="bat-pct" id="bat-pct-large">75%</div>
+              <div class="bat-est">~5 days remaining</div>
+            </div>
+            <div class="bat-info-row">
+              <div class="bat-info-item"><span class="bi-lbl">Type</span><span class="bi-val">LiPo 150 mAh</span></div>
+              <div class="bat-info-item"><span class="bi-lbl">Charging</span><span class="bi-val">Magnetic Dock</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label">LED Color</div>
+          <div class="glass-card">
+            <p class="card-sub-label">Choose your status LED color</p>
+            <div class="led-picker">
+              <button class="led-swatch active" data-color="#00C896" onclick="pickLED(this)"
+                style="--c:#00C896"></button>
+              <button class="led-swatch" data-color="#FF6B6B" onclick="pickLED(this)" style="--c:#FF6B6B"></button>
+              <button class="led-swatch" data-color="#6B8FFF" onclick="pickLED(this)" style="--c:#6B8FFF"></button>
+              <button class="led-swatch" data-color="#FFD93D" onclick="pickLED(this)" style="--c:#FFD93D"></button>
+              <button class="led-swatch" data-color="#FF6BCB" onclick="pickLED(this)" style="--c:#FF6BCB"></button>
+              <button class="led-swatch" data-color="#FFFFFF" onclick="pickLED(this)" style="--c:#FFFFFF"></button>
+            </div>
+          </div>
+
+          <div class="section-label">Button Actions</div>
+          <div class="glass-card">
+            <div class="btn-ref-item">
+              <div class="bri-press">Short Press</div>
+              <div class="bri-action">Show battery via LED</div>
+            </div>
+            <div class="btn-ref-item">
+              <div class="bri-press">Double Press</div>
+              <div class="bri-action">Sync data</div>
+            </div>
+            <div class="btn-ref-item">
+              <div class="bri-press">Long Press (3s)</div>
+              <div class="bri-action">Trigger SOS alert</div>
+            </div>
+            <div class="btn-ref-item">
+              <div class="bri-press">Very Long (5s)</div>
+              <div class="bri-action">Enter pairing mode</div>
+            </div>
+          </div>
+
+          <div class="section-label">Hardware Info</div>
+          <div class="glass-card">
+            <div class="info-row"><span class="ir-lbl">MCU + BLE</span><span class="ir-val">Silicon Labs
+                EFR32BG22</span></div>
+            <div class="info-row"><span class="ir-lbl">Accelerometer</span><span class="ir-val">Bosch BMA400</span>
+            </div>
+            <div class="info-row"><span class="ir-lbl">Memory</span><span class="ir-val">8MB SPI Flash</span></div>
+            <div class="info-row"><span class="ir-lbl">Water Resistance</span><span class="ir-val">IP67</span></div>
+            <div class="info-row"><span class="ir-lbl">MAC Address</span><span class="ir-val">A4:C1:38:5E:2B:7F</span>
+            </div>
+          </div>
+
+          <button class="btn-danger" onclick="confirmUnpair()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Forget Device
+          </button>
+          <div class="bottom-pad"></div>
+        </div>
+      </div>
+
+      <!-- ═══════ SETTINGS ═══════ -->
+      <div id="screen-settings" class="screen-main">
+        <div class="scroll-area">
+          <div class="page-header">
+            <h2>Settings</h2>
+          </div>
+          <div class="profile-card">
+            <div class="profile-avatar" id="prof-avatar">VB</div>
+            <div class="profile-info">
+              <div class="profile-name" id="prof-name">Member</div>
+              <div class="profile-sub" id="prof-sub">Vihara Band Member</div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;">
+              <button class="profile-edit-btn" onclick="openProfileModal()">Edit</button>
+              <button class="profile-signout-btn" onclick="signOutUser()" title="Sign Out / Switch Account">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                  <polyline points="16 17 21 12 16 7"></polyline>
+                  <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="section-label">Preferences</div>
+          <div class="glass-card">
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Units</div>
+                <div class="sd">Distance measurement</div>
+              </div>
+              <div class="unit-toggle"><button class="unit-btn active" id="u-km"
+                  onclick="setUnit('km')">km</button><button class="unit-btn" id="u-mi"
+                  onclick="setUnit('mi')">mi</button></div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">App Theme</div>
+                <div class="sd">Switch between dark and light mode</div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button class="theme-toggle-btn" id="theme-dark-btn" onclick="setTheme('dark')">
+                  🌙 Dark
+                </button>
+                <button class="theme-toggle-btn" id="theme-light-btn" onclick="setTheme('light')">
+                  ☀️ Light
+                </button>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Daily Step Goal</div>
+                <div class="sd">Target steps per day</div>
+              </div>
+              <input type="number" class="num-input" id="step-goal-input" value="10000" min="1000" max="50000"
+                step="500" onchange="updateGoal(this.value)">
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Auto-Sync on Open</div>
+                <div class="sd">Sync when app launches</div>
+              </div>
+              <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="setting-row clickable" onclick="showScreen('device')">
+              <div class="setting-info">
+                <div class="sn">Device Settings</div>
+                <div class="sd">LED, battery, firmware info</div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="section-label">Notifications</div>
+          <div class="glass-card">
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Fall Alerts</div>
+                <div class="sd">Push notification on fall</div>
+              </div><label class="toggle"><input type="checkbox" id="notif-toggle-fall" checked onchange="onNotificationToggleChange(this)"><span class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">SOS Confirmation</div>
+                <div class="sd">Confirm when SOS is sent</div>
+              </div><label class="toggle"><input type="checkbox" id="notif-toggle-sos" checked onchange="onNotificationToggleChange(this)"><span class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Battery Low (20%)</div>
+                <div class="sd">Low battery warning</div>
+              </div><label class="toggle"><input type="checkbox" id="notif-toggle-battery" checked onchange="onNotificationToggleChange(this)"><span class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Daily Goal Reached</div>
+                <div class="sd">Celebrate achievements</div>
+              </div><label class="toggle"><input type="checkbox" id="notif-toggle-goal" checked onchange="onNotificationToggleChange(this)"><span class="slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Sedentary Reminders</div>
+                <div class="sd">Move-it notifications</div>
+              </div><label class="toggle"><input type="checkbox" id="notif-toggle-sedentary" checked onchange="onNotificationToggleChange(this)"><span class="slider"></span></label>
+            </div>
+          </div>
+
+          <div class="section-label">Data &amp; Privacy</div>
+          <div class="glass-card">
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="sn">Store History</div>
+                <div class="sd">Keep 30 days of activity data</div>
+              </div><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="info-row clickable" onclick="requestBatteryOptimization()"><span class="ir-lbl">24/7 Background Tracking (Battery Exemption)</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg></div>
+            <div class="info-row clickable" onclick="exportCSV()"><span class="ir-lbl">Export My Data (CSV)</span><svg
+                width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg></div>
+            <div class="info-row clickable" onclick="showToast('Privacy Policy — Available soon')"><span
+                class="ir-lbl">Privacy Policy</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="#8A8F9C" stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg></div>
+          </div>
+
+          <div class="section-label">About</div>
+          <div class="glass-card">
+            <div class="info-row"><span class="ir-lbl">App Version</span><span class="ir-val">1.0.0 (Phase 1 MVP)</span>
+            </div>
+            <div class="info-row"><span class="ir-lbl">Build</span><span class="ir-val">20260629</span></div>
+            <div class="info-row"><span class="ir-lbl">Compatible Band</span><span class="ir-val">Vihara Band v1</span>
+            </div>
+            <div class="info-row"><span class="ir-lbl">Next Update</span><span class="ir-val">Phase 2 — Analytics</span>
+            </div>
+          </div>
+          <button class="btn-danger" onclick="confirmUnpair()" style="margin: 20px 0 10px 0; width: 100%;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Disconnect Band
+          </button>
+          <div class="bottom-pad"></div>
+        </div>
+      </div>
+
+      <!-- ═══════ BOTTOM NAV ═══════ -->
+      <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-btn active" id="nb-dashboard" onclick="showScreen('dashboard')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>Home</span>
+        </button>
+        <button class="nav-btn" id="nb-activity" onclick="showScreen('activity')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <span>Activity</span>
+        </button>
+        <button class="nav-btn nav-sos-wrap" id="nb-sos" onclick="showScreen('sos')">
+          <div class="nav-sos-bubble"><span>SOS</span></div>
+        </button>
+        <button class="nav-btn" id="nb-insights" onclick="showScreen('insights')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 20V10M12 20V4M6 20v-6" />
+          </svg>
+          <span>Insights</span>
+        </button>
+        <button class="nav-btn" id="nb-settings" onclick="showScreen('settings')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+    </div><!-- /main-app -->
+
+    <!-- ═══════════════════════════ MODALS ═══════════════════════════ -->
+
+    <!-- Edit Profile Modal (Professional Health-Tech Edition) -->
+    <div class="modal-overlay hidden" id="modal-profile" onclick="overlayClose(event,'modal-profile')">
+      <div class="modal modal--profile">
+        <div class="modal-hdr">
+          <div>
+            <div class="modal-subtitle">PERSONAL PROFILE</div>
+            <h3 id="modal-profile-title">Your Profile</h3>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="prof-completion-badge" id="prof-completion-badge">75% Complete</span>
+            <button class="modal-x" onclick="closeModal('modal-profile')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Profile Progress Bar -->
+        <div class="prof-progress-bar">
+          <div class="prof-progress-fill" id="prof-progress-fill" style="width: 75%;"></div>
+        </div>
+
+        <div class="modal-body modal-body--scrollable">
+
+          <!-- Google Authentication Sync Card -->
+          <div class="google-auth-card" id="google-auth-card">
+            <div class="google-card-left">
+              <div class="google-icon-box" id="google-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+              </div>
+              <div class="google-card-info">
+                <div class="google-card-title" id="google-card-title">Google Account Sync</div>
+                <div class="google-card-desc" id="google-card-desc">Sync your name, photo & health profile</div>
+              </div>
+            </div>
+            <div class="google-card-action">
+              <button class="btn-google-sync" id="btn-google-action" onclick="loginWithGoogle()">
+                <span>Connect</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Section Quick-Jump Buttons -->
+          <div class="prof-section-tabs">
+            <button class="prof-tab-btn active" id="tab-sec-name" onclick="jumpToProfileSection('sec-prof-name')">
+              <span>👤</span> Name
+            </button>
+            <button class="prof-tab-btn" id="tab-sec-age" onclick="jumpToProfileSection('sec-prof-age')">
+              <span>🎂</span> Age
+            </button>
+            <button class="prof-tab-btn" id="tab-sec-body" onclick="jumpToProfileSection('sec-prof-body')">
+              <span>⚖️</span> Body
+            </button>
+            <button class="prof-tab-btn" id="tab-sec-goal" onclick="jumpToProfileSection('sec-prof-goal')">
+              <span>🎯</span> Goal
+            </button>
+          </div>
+
+          <!-- Section 1: Full Name -->
+          <div class="prof-question-card" id="sec-prof-name">
+            <div class="pqc-header">
+              <div class="pqc-num">1</div>
+              <div>
+                <div class="pqc-title">What should we call you?</div>
+                <div class="pqc-sub">Your name for greetings, summaries, and alerts</div>
+              </div>
+            </div>
+            <div class="pqc-body">
+              <div class="prof-name-input-wrap">
+                <div class="prof-avatar-preview" id="prof-modal-avatar">VB</div>
+                <input type="text" class="form-inp" id="inp-prof-name" placeholder="e.g. Alex Sharma" maxlength="40" oninput="onProfileInputChange()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Age -->
+          <div class="prof-question-card" id="sec-prof-age">
+            <div class="pqc-header">
+              <div class="pqc-num">2</div>
+              <div>
+                <div class="pqc-title">What is your age?</div>
+                <div class="pqc-sub">Calibrates max heart rate & metabolic burn curves</div>
+              </div>
+            </div>
+            <div class="pqc-body">
+              <div style="display:flex;gap:10px;align-items:center;">
+                <input type="number" class="form-inp" id="inp-prof-age" placeholder="e.g. 28" min="5" max="120" style="flex:1;" oninput="onProfileInputChange()">
+                <span class="inp-unit-label">years old</span>
+              </div>
+              <!-- Quick Age Demographics Buttons -->
+              <div class="age-preset-group">
+                <button class="chip-preset" onclick="setAgePreset(22)">18–25</button>
+                <button class="chip-preset" onclick="setAgePreset(30)">26–35</button>
+                <button class="chip-preset" onclick="setAgePreset(42)">36–50</button>
+                <button class="chip-preset" onclick="setAgePreset(58)">50+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Body Metrics & Live BMI -->
+          <div class="prof-question-card" id="sec-prof-body">
+            <div class="pqc-header">
+              <div class="pqc-num">3</div>
+              <div>
+                <div class="pqc-title">What are your body metrics?</div>
+                <div class="pqc-sub">Estimates stride length and basal metabolic rate (BMR)</div>
+              </div>
+            </div>
+            <div class="pqc-body">
+              <div style="display:flex;gap:12px;">
+                <div style="flex:1;">
+                  <div class="pqc-metric-lbl">
+                    <span>Height</span>
+                    <span class="unit-badge">cm</span>
+                  </div>
+                  <input type="number" class="form-inp" id="inp-prof-height" placeholder="e.g. 175" min="50" max="250" oninput="onBodyMetricsChange()">
+                </div>
+                <div style="flex:1;">
+                  <div class="pqc-metric-lbl">
+                    <span>Weight</span>
+                    <span class="unit-badge">kg</span>
+                  </div>
+                  <input type="number" class="form-inp" id="inp-prof-weight" placeholder="e.g. 70" min="20" max="300" oninput="onBodyMetricsChange()">
+                </div>
+              </div>
+
+              <!-- Live Calculated BMI Badge -->
+              <div class="bmi-feedback-card" id="bmi-feedback-card">
+                <div class="bmi-score-pill" id="bmi-score-pill">
+                  <span class="bmi-val" id="bmi-val">--</span>
+                  <span class="bmi-cat" id="bmi-cat">Enter Height & Weight</span>
+                </div>
+                <div class="bmi-explanation" id="bmi-explanation">
+                  Calculated Body Mass Index (BMI) dynamically informs calorie burn rates.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Daily Step Goal & Dynamic Smart Hint -->
+          <div class="prof-question-card" id="sec-prof-goal">
+            <div class="pqc-header">
+              <div class="pqc-num">4</div>
+              <div>
+                <div class="pqc-title">What is your daily step goal?</div>
+                <div class="pqc-sub">Your main activity ring target on Vihara Band</div>
+              </div>
+            </div>
+            <div class="pqc-body">
+              <!-- Quick Presets -->
+              <div class="goal-presets-grid">
+                <button class="goal-preset-btn" id="gbtn-5000" onclick="setGoalPreset(5000)">
+                  <span class="gp-num">5,000</span>
+                  <span class="gp-lbl">Light Active</span>
+                </button>
+                <button class="goal-preset-btn active" id="gbtn-8000" onclick="setGoalPreset(8000)">
+                  <span class="gp-badge">Recommended</span>
+                  <span class="gp-num">8,000</span>
+                  <span class="gp-lbl">Longevity Target</span>
+                </button>
+                <button class="goal-preset-btn" id="gbtn-10000" onclick="setGoalPreset(10000)">
+                  <span class="gp-num">10,000</span>
+                  <span class="gp-lbl">Fitness Classic</span>
+                </button>
+                <button class="goal-preset-btn" id="gbtn-12500" onclick="setGoalPreset(12500)">
+                  <span class="gp-num">12,500</span>
+                  <span class="gp-lbl">High Endurance</span>
+                </button>
+              </div>
+
+              <!-- Stepper and Custom Input -->
+              <div class="goal-stepper-wrap">
+                <button class="stepper-btn" onclick="adjustStepGoal(-500)">−</button>
+                <input type="number" class="form-inp goal-inp" id="inp-prof-goal" placeholder="8000" step="500" min="1000" max="50000" oninput="onStepGoalInputChange()">
+                <button class="stepper-btn" onclick="adjustStepGoal(500)">+</button>
+              </div>
+
+              <!-- Dynamic Science Hint Card -->
+              <div class="step-hint-card" id="step-hint-card">
+                <div class="shc-header">
+                  <span class="shc-icon">💡</span>
+                  <span class="shc-title" id="shc-title">Longevity Sweet Spot</span>
+                  <span class="shc-cals-badge" id="shc-cals-badge">~380 kcal</span>
+                </div>
+                <div class="shc-body" id="shc-body">
+                  Lancet & NIH studies reveal that reaching ~8,000 steps/day provides the strongest reduction in cardiovascular risk and optimal metabolic vitality.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /modal-body -->
+
+        <div class="modal-footer">
+          <button class="btn-outline" onclick="closeModal('modal-profile')">Cancel</button>
+          <button class="btn-primary" onclick="saveProfileFromModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Save Profile</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Contact Modal -->
+    <div class="modal-overlay hidden" id="modal-contact" onclick="overlayClose(event,'modal-contact')">
+      <div class="modal">
+        <div class="modal-hdr">
+          <h3>Add Emergency Contact</h3><button class="modal-x" onclick="closeModal('modal-contact')"><svg width="18"
+              height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg></button>
+        </div>
+        <div class="modal-body">
+          <label class="form-lbl">Full Name</label>
+          <input type="text" class="form-inp" id="inp-name" placeholder="e.g. Sarah Saldanha">
+          <label class="form-lbl">Phone Number</label>
+          <input type="tel" class="form-inp" id="inp-phone" placeholder="+91 98765 43210">
+          <label class="form-lbl">Relationship</label>
+          <select class="form-inp" id="inp-relation">
+            <option>Family Member</option>
+            <option>Friend</option>
+            <option>Caregiver</option>
+            <option>Doctor</option>
+          </select>
+          <div class="primary-contact-row">
+            <label class="toggle" style="width:36px;height:20px"><input type="checkbox" id="inp-primary"><span
+                class="slider"></span></label>
+            <span class="sd">Set as primary contact (called first)</span>
+          </div>
+        </div>
+        <div class="modal-footer" style="flex-wrap:wrap;gap:8px;">
+          <button class="btn-outline" onclick="closeModal('modal-contact')" style="flex:1 1 48%;margin:0;">Cancel</button>
+          <button class="btn-outline" onclick="pickFromContacts()" style="flex:1 1 48%;margin:0;">📇 From Contacts</button>
+          <button class="btn-primary" onclick="addContact()" style="flex:1 1 100%;margin:0;">Add Contact</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unpair Modal -->
+    <div class="modal-overlay hidden" id="modal-unpair" onclick="overlayClose(event,'modal-unpair')">
+      <div class="modal">
+        <div class="modal-hdr">
+          <h3>Forget Device?</h3>
+        </div>
+        <div class="modal-body">
+          <p style="color:var(--text-2,#B8BCC8);line-height:1.6">This will disconnect and forget your Vihara Band.
+            You'll need to pair again to use the app.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-outline" onclick="closeModal('modal-unpair')">Cancel</button>
+          <button class="btn-danger" onclick="unpairDevice()">Forget Device</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enable Bluetooth Modal -->
+    <div class="modal-overlay hidden" id="modal-bluetooth-enable" onclick="overlayClose(event,'modal-bluetooth-enable')">
+      <div class="modal" style="text-align: center;">
+        <div class="modal-hdr" style="justify-content: center; border: none; padding-bottom: 0;">
+          <div style="width: 54px; height: 54px; border-radius: 50%; background: rgba(107, 143, 255, 0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent,#00C896)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 7l10 10-5 5V2l5 5L7 17"/>
+            </svg>
+          </div>
+        </div>
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-1,#fff);">Bluetooth is Turned Off</h3>
+        <div class="modal-body" style="padding: 0 10px;">
+          <p style="color:var(--text-2,#B8BCC8);line-height:1.5;font-size:13px;">Please turn on Bluetooth on your phone to scan and connect to your Vihara Band.</p>
+        </div>
+        <div class="modal-footer" style="flex-direction: column; gap: 10px; margin-top: 16px; width: 100%;">
+          <button class="btn-primary" onclick="requestEnableBluetooth()" style="width:100%; justify-content: center;">Turn On Bluetooth</button>
+          <button class="btn-outline" onclick="closeModal('modal-bluetooth-enable')" style="width:100%; justify-content: center; border-color: rgba(255,255,255,0.15);">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════ OVERLAYS ═══════════════════════════ -->
+
+    <!-- TOAST -->
+    <div class="toast hidden" id="toast"><span id="toast-msg">Done</span></div>
+
+    <!-- SOS SENT OVERLAY -->
+    <div class="sos-overlay hidden" id="sos-overlay">
+      <div class="sos-sent-content">
+        <div class="sos-sent-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white"
+            stroke-width="2">
+            <polyline points="22 4 12 14.01 9 11.01" />
+            <path d="M21 12a9 9 0 1 1-3.45-7.1" />
+          </svg></div>
+        <h2>SOS Alert Sent!</h2>
+        <p>Calling your primary emergency contact now.</p>
+        <button class="fa-call-btn" onclick="callEmergency()" style="margin-top:20px;width:100%">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Call Primary Contact
+        </button>
+        <button class="fa-call-btn" onclick="sendSmsAll()" style="margin-top:10px;width:100%">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          SMS All Contacts
+        </button>
+        <button class="btn-primary" onclick="closeSosOverlay()" style="margin-top:10px;width:100%">Close</button>
+      </div>
+    </div>
+
+    <!-- FALL ALERT OVERLAY -->
+    <div class="fall-alert-overlay hidden" id="fall-alert-overlay">
+      <div class="fa-content">
+        <div class="fa-pulse-ring">
+          <div class="fa-pulse-ring-inner"></div>
+        </div>
+        <div class="fa-icon">⚠️</div>
+        <h2>Fall Detected!</h2>
+        <p>Are you okay? Emergency contacts will be alerted in:</p>
+        <div class="fa-countdown" id="fa-countdown">60</div>
+        <div class="fa-countdown-bar">
+          <div class="fa-countdown-fill" id="fa-countdown-fill"></div>
+        </div>
+        <div class="fa-actions">
+          <button class="fa-ok-btn" id="fa-ok-btn" onclick="cancelFallAlert()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            I'm OK — Cancel
+          </button>
+          <button class="fa-call-btn" onclick="callEmergency()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            Call Emergency
+          </button>
+        </div>
+      </div>
+    </div>
+
+  <!-- Floating Debug Console -->
+  <div id="debug-console" style="position: fixed; top: 10px; left: 10px; right: 10px; bottom: 80px; background: rgba(10, 10, 15, 0.95); border: 1px solid var(--border); border-radius: 12px; z-index: 10000; font-family: monospace; font-size: 11px; padding: 10px; overflow-y: auto; color: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.5); display: none;">
+    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 6px; font-weight: bold; color: var(--accent); font-size: 12px;">
+      <span>Vihara App Debug Console</span>
+      <button onclick="document.getElementById('debug-console').style.display='none'" style="background: none; border: none; color: var(--red); font-family: monospace; font-size: 12px; cursor: pointer;">Close</button>
+    </div>
+    <div id="debug-logs" style="display: flex; flex-direction: column; gap: 4px;"></div>
+  </div>
+
+  </div><!-- /app -->
+  <script type="module" src="js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        navigator.serviceWorker.getRegistrations().then((regs) => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then((names) => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('ServiceWorker registered:', reg))
+            .catch(err => console.log('ServiceWorker registration failed:', err));
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Local env / configurations
+.env
+.env.local
+.vercel
+
+# Compiled packages
+*.apk
+*.aar
+*.aab
+
+# IDE / Editor folders
+.idea/
+.codex/
+*.log
+

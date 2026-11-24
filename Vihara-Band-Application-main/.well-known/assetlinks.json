@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.viharaband.companion",
+      "sha256_cert_fingerprints": [
+        "10:8A:4B:0B:9F:8D:05:C6:F6:3E:64:38:70:8E:79:04:7F:8D:0F:1C:36:55:67:29:1F:FD:20:D5:2F:2B:A4:08"
+      ]
+    }
+  }
+]

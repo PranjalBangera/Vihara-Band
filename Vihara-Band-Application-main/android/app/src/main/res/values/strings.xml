@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Vihara Band</string>
+    <string name="title_activity_main">Vihara Band</string>
+    <string name="package_name">com.viharaband.companion</string>
+    <string name="custom_url_scheme">com.viharaband.companion</string>
+    <string name="server_client_id">392832956905-9nr81fqpkrbqg3qhd2afdnpcvo12s7fs.apps.googleusercontent.com</string>
+</resources>

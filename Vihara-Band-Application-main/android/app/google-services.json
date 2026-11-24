@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "392832956905",
+    "project_id": "vihara-band",
+    "storage_bucket": "vihara-band.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392832956905:android:a647103e0bd68dd1b57378",
+        "android_client_info": {
+          "package_name": "com.viharaband.companion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392832956905-ous19tupaofnrbevi81um21qjf2gtk4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.viharaband.companion",
+            "certificate_hash": "b1a8b168b459bf08ec820acd5092b9d8b03daaa8"
+          }
+        },
+        {
+          "client_id": "392832956905-9nr81fqpkrbqg3qhd2afdnpcvo12s7fs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCljpMXf0XBopYV9KgWVevfA4Ro6b2TG9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392832956905-9nr81fqpkrbqg3qhd2afdnpcvo12s7fs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

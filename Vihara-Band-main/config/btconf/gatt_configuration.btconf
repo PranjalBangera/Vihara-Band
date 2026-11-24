@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gatt generic_attribute_service="true" header="gatt_db.h" name="Custom BLE GATT" out="gatt_db.c" prefix="gattdb_">
+
+  <service advertise="false" id="generic_access" name="Generic Access"
+           requirement="mandatory" type="primary" uuid="1800">
+    <characteristic id="device_name" name="Device Name" uuid="2A00">
+      <value length="11" type="utf-8" variable_length="false">Vihara Band</value>
+      <properties>
+        <read  authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    <characteristic id="appearance" name="Appearance" uuid="2A01">
+      <value length="2" type="hex" variable_length="false">0000</value>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <service advertise="false" id="generic_attribute" name="Generic Attribute"
+           requirement="mandatory" type="primary" uuid="1801">
+    <characteristic id="database_changed" name="Service Changed" uuid="2A05">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <service advertise="false" id="battery_service" name="Battery Service"
+           requirement="mandatory" type="primary" uuid="180F">
+    <characteristic id="battery_level" name="Battery Level" uuid="2A19">
+      <value length="1" type="user" variable_length="false"/>
+      <properties>
+        <read   authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <service advertise="true" id="vihara_band_service" name="Vihara Band Service"
+           requirement="mandatory" type="primary"
+           uuid="12340000-1234-1234-1234-123456789012">
+    <characteristic id="step_count" name="Step Count"
+                    uuid="12340001-1234-1234-1234-123456789012">
+      <value length="3" type="user" variable_length="false"/>
+      <properties>
+        <read   authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    <characteristic id="fall_event" name="Fall Event"
+                    uuid="12340002-1234-1234-1234-123456789012">
+      <value length="1" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    <characteristic id="device_status" name="Device Status"
+                    uuid="12340003-1234-1234-1234-123456789012">
+      <value length="2" type="user" variable_length="false"/>
+      <properties>
+        <read   authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+</gatt>
